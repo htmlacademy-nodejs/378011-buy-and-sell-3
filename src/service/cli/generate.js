@@ -15,6 +15,7 @@ const {
   SumRestrict,
   PictureRestrict,
   Messages,
+  EXIT_CODE_FAILURE,
 } = require(`./constants`);
 
 const getPictureFileName = (number)=>`item${(`0` + number).slice(-2)}.jpg`;
@@ -38,10 +39,11 @@ module.exports = {
     const content = JSON.stringify(generateOffers(countOffer));
     fs.writeFile(FILE_NAME, content, (err) => {
       if (err) {
-        return console.error(Messages.error);
+        console.error(Messages.error);
+        process.exit(EXIT_CODE_FAILURE);
       }
 
-      return console.info(Messages.success);
+      console.info(Messages.success);
     });
   }
 };

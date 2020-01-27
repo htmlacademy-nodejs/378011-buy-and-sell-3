@@ -1,10 +1,10 @@
 'use strict';
 
-module.exports.DEFAULT_COUNT = 1;
+const DEFAULT_COUNT = 1;
 
-module.exports.FILE_NAME = `mock.json`;
+const FILE_NAME = `mock.json`;
 
-module.exports.TITLES = [
+const TITLES = [
   `Продам книги Стивена Кинга`,
   `Продам новую приставку Sony Playstation 5`,
   `Продам отличную подборку фильмов на VHS`,
@@ -16,7 +16,7 @@ module.exports.TITLES = [
   `Куплю детские санки`
 ];
 
-module.exports.SENTENCES = [
+const SENTENCES = [
   `Товар в отличном состоянии.`,
   `Пользовались бережно и только по большим праздникам.`,
   `Продаю с болью в сердце...`,
@@ -34,7 +34,7 @@ module.exports.SENTENCES = [
   `Не пытайтесь торговаться. Цену вещам я знаю`
 ];
 
-module.exports.CATEGORIES = [
+const CATEGORIES = [
   `Книги`,
   `Разное`,
   `Посуда`,
@@ -43,7 +43,7 @@ module.exports.CATEGORIES = [
   `Журналы`,
 ];
 
-module.exports.HELP = `Программа запускает http-сервер и формирует файл с данными для API.
+const HELP = `Программа запускает http-сервер и формирует файл с данными для API.
 
     Гайд:
     server <command>
@@ -53,34 +53,50 @@ module.exports.HELP = `Программа запускает http-сервер �
     --help:               печатает этот текст
     --generate <count>    формирует файл mocks.json`;
 
-module.exports.USER_ARGV_INDEX = 2;
+const USER_ARGV_INDEX = 2;
 
-module.exports.DEFAULT_COMMAND = `--help`;
+const DEFAULT_COMMAND = `--help`;
 
-module.exports.MAX_OFFERS_NUMBER = 1000;
+const MAX_OFFERS_NUMBER = 1000;
 
-module.exports.OfferType = {
+const OfferType = {
   offer: `offer`,
   sale: `sale`,
 };
 
-module.exports.SumRestrict = {
+const SumRestrict = {
   min: 1000,
   max: 100000,
 };
 
-module.exports.PictureRestrict = {
+const PictureRestrict = {
   min: 1,
   max: 16,
 };
 
-module.exports.ExitCode = {
-  success: 0,
-  failure: 1,
-};
+const EXIT_CODE_FAILURE = 1;
 
-module.exports.Messages = {
+const Messages = {
   error: `Can't write data to file...`,
   success: `Operation success. File created.`,
   overmuch: `Не больше 1000 объявлений`,
+};
+const GENERATE_COMMAND = `--generate`;
+
+module.exports = {
+  DEFAULT_COUNT,
+  FILE_NAME,
+  TITLES,
+  SENTENCES,
+  CATEGORIES,
+  HELP,
+  USER_ARGV_INDEX,
+  DEFAULT_COMMAND,
+  MAX_OFFERS_NUMBER,
+  OfferType,
+  SumRestrict,
+  PictureRestrict,
+  EXIT_CODE_FAILURE,
+  Messages,
+  GENERATE_COMMAND,
 };
