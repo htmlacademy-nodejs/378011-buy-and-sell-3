@@ -1,6 +1,7 @@
 'use strict';
 
-const fs = require(`fs`);
+const chalk = require(`chalk`);
+const fs = require(`fs`).promises;
 const {
   getRandomInt,
   shuffle,
@@ -16,6 +17,7 @@ const {
   PictureRestrict,
   Messages,
   EXIT_CODE_FAILURE,
+  MAX_OFFERS_NUMBER,
 } = require(`./constants`);
 
 const getPictureFileName = (number)=>`item${(`0` + number).slice(-2)}.jpg`;
@@ -33,17 +35,20 @@ const generateOffers = (count) => (
 
 module.exports = {
   name: `--generate`,
-  run(args) {
+  async run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+    if (countOffer > MAX_OFFERS_NUMBER) {
+      console.info(chalk.red(Messages.overmuch));
+      process.exit(EXIT_CODE_FAILURE);
+    }
     const content = JSON.stringify(generateOffers(countOffer));
-    fs.writeFile(FILE_NAME, content, (err) => {
-      if (err) {
-        console.error(Messages.error);
-        process.exit(EXIT_CODE_FAILURE);
-      }
-
-      console.info(Messages.success);
-    });
+    try {
+      await fs.writeFile(FILE_NAME, content);
+      console.info(chalk.green(Messages.success));
+    } catch (err) {
+      console.error(chalk.red(Messages.error));
+      process.exit(EXIT_CODE_FAILURE);
+    }
   }
 };
