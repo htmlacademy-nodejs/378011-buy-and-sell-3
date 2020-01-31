@@ -9,45 +9,60 @@ const {
 const {
   DEFAULT_COUNT,
   FILE_NAME,
-  TITLES,
-  SENTENCES,
-  CATEGORIES,
   OfferType,
   SumRestrict,
   PictureRestrict,
   Messages,
   EXIT_CODE_FAILURE,
   MAX_OFFERS_NUMBER,
+  FILE_SENTENCES_PATH,
+  FILE_TITLES_PATH,
+  FILE_CATEGORIES_PATH,
 } = require(`./constants`);
+
 
 const getPictureFileName = (number)=>`item${(`0` + number).slice(-2)}.jpg`;
 
-const generateOffers = (count) => (
+const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    category: [CATEGORIES[getRandomInt(0, CATEGORIES.length - 1)]],
-    description: shuffle(SENTENCES).slice(1, 5).join(` `),
+    category: [categories[getRandomInt(0, categories.length - 1)]],
+    description: shuffle(sentences).slice(1, 5).join(` `),
     picture: getPictureFileName(getRandomInt(PictureRestrict.min, PictureRestrict.max)),
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
+    title: titles[getRandomInt(0, titles.length - 1)],
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInt(SumRestrict.min, SumRestrict.max),
   }))
 );
 
+const readContent = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return content.split(`\n`);
+  } catch (err) {
+    console.error(chalk.red(`${Messages.readingError} ${filePath}`));
+    return process.exit(EXIT_CODE_FAILURE);
+  }
+};
+
 module.exports = {
   name: `--generate`,
   async run(args) {
+    const sentences = await readContent(FILE_SENTENCES_PATH);
+    const titles = await readContent(FILE_TITLES_PATH);
+    const categories = await readContent(FILE_CATEGORIES_PATH);
+
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     if (countOffer > MAX_OFFERS_NUMBER) {
       console.info(chalk.red(Messages.overmuch));
       process.exit(EXIT_CODE_FAILURE);
     }
-    const content = JSON.stringify(generateOffers(countOffer));
+    const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
     try {
       await fs.writeFile(FILE_NAME, content);
       console.info(chalk.green(Messages.success));
     } catch (err) {
-      console.error(chalk.red(Messages.error));
+      console.error(chalk.red(Messages.writingError));
       process.exit(EXIT_CODE_FAILURE);
     }
   }
