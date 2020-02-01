@@ -26,12 +26,12 @@ const getPictureFileName = (number)=>`item${(`0` + number).slice(-2)}.jpg`;
 
 const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    categories: shuffle(categories).slice(0, getRandomInt(CategoriesRestrict.min, CategoriesRestrict.max)).join(`, `),
+    categories: shuffle(categories).slice(0, getRandomInt(CategoriesRestrict.MIN, CategoriesRestrict.MAX)).join(`, `),
     description: shuffle(sentences).slice(1, 5).join(` `),
-    picture: getPictureFileName(getRandomInt(PictureRestrict.min, PictureRestrict.max)),
+    picture: getPictureFileName(getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)),
     title: titles[getRandomInt(0, titles.length - 1)],
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
-    sum: getRandomInt(SumRestrict.min, SumRestrict.max),
+    sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
   }))
 );
 
@@ -41,7 +41,7 @@ const readContent = async (filePath) => {
     const content = initialContent.trim();
     return content.split(`\n`);
   } catch (err) {
-    console.error(chalk.red(`${Messages.readingError} ${filePath}`));
+    console.error(chalk.red(`${Messages.READING_ERROR} ${filePath}`));
     return process.exit(EXIT_CODE_FAILURE);
   }
 };
@@ -56,15 +56,15 @@ module.exports = {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     if (countOffer > MAX_OFFERS_NUMBER) {
-      console.info(chalk.red(Messages.overmuch));
+      console.info(chalk.red(Messages.OVERMUCH));
       process.exit(EXIT_CODE_FAILURE);
     }
     const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
     try {
       await fs.writeFile(FILE_NAME, content);
-      console.info(chalk.green(Messages.success));
+      console.info(chalk.green(Messages.SUCCESS));
     } catch (err) {
-      console.error(chalk.red(Messages.writingError));
+      console.error(chalk.red(Messages.WRITING_ERROR));
       process.exit(EXIT_CODE_FAILURE);
     }
   }

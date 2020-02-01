@@ -21,32 +21,32 @@ const DEFAULT_COMMAND = `--help`;
 const MAX_OFFERS_NUMBER = 1000;
 
 const OfferType = {
-  offer: `offer`,
-  sale: `sale`,
+  OFFER: `offer`,
+  SALE: `sale`,
 };
 
 const SumRestrict = {
-  min: 1000,
-  max: 100000,
+  MIN: 1000,
+  MAX: 100000,
 };
 
 const PictureRestrict = {
-  min: 1,
-  max: 16,
+  MIN: 1,
+  MAX: 16,
 };
 
 const CategoriesRestrict = {
-  min: 1,
-  max: 3,
+  MIN: 1,
+  MAX: 3,
 };
 
 const EXIT_CODE_FAILURE = 1;
 
 const Messages = {
-  writingError: `Can't write data to file...`,
-  readingError: `Can't read data from file`,
-  success: `Operation success. File created.`,
-  overmuch: `Не больше 1000 объявлений`,
+  WRITING_ERROR: `Can't write data to file...`,
+  READING_ERROR: `Can't read data from file`,
+  SUCCESS: `Operation success. File created.`,
+  OVERMUCH: `Не больше 1000 объявлений`,
 };
 const GENERATE_COMMAND = `--generate`;
 
