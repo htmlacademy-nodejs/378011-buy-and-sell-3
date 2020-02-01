@@ -35,6 +35,11 @@ const PictureRestrict = {
   max: 16,
 };
 
+const CategoriesRestrict = {
+  min: 1,
+  max: 3,
+};
+
 const EXIT_CODE_FAILURE = 1;
 
 const Messages = {
@@ -59,6 +64,7 @@ module.exports = {
   OfferType,
   SumRestrict,
   PictureRestrict,
+  CategoriesRestrict,
   EXIT_CODE_FAILURE,
   Messages,
   GENERATE_COMMAND,

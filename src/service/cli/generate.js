@@ -12,6 +12,7 @@ const {
   OfferType,
   SumRestrict,
   PictureRestrict,
+  CategoriesRestrict,
   Messages,
   EXIT_CODE_FAILURE,
   MAX_OFFERS_NUMBER,
@@ -25,7 +26,7 @@ const getPictureFileName = (number)=>`item${(`0` + number).slice(-2)}.jpg`;
 
 const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    category: [categories[getRandomInt(0, categories.length - 1)]],
+    categories: shuffle(categories).slice(0, getRandomInt(CategoriesRestrict.min, CategoriesRestrict.max)).join(`, `),
     description: shuffle(sentences).slice(1, 5).join(` `),
     picture: getPictureFileName(getRandomInt(PictureRestrict.min, PictureRestrict.max)),
     title: titles[getRandomInt(0, titles.length - 1)],
@@ -36,7 +37,8 @@ const generateOffers = (count, titles, categories, sentences) => (
 
 const readContent = async (filePath) => {
   try {
-    const content = await fs.readFile(filePath, `utf8`);
+    const initialContent = await fs.readFile(filePath, `utf8`);
+    const content = initialContent.trim();
     return content.split(`\n`);
   } catch (err) {
     console.error(chalk.red(`${Messages.readingError} ${filePath}`));
