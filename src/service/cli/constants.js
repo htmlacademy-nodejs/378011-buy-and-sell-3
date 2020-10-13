@@ -71,6 +71,12 @@ const HttpCode = {
   UNAUTHORIZED: 401,
 };
 
+const MAX_ID_LENGTH = 6;
+
+const MAX_COMMENTS = 4;
+
+const FILE_COMMENTS_PATH = `./data/comments.txt`;
+
 module.exports = {
   DEFAULT_COUNT,
   FILE_NAME,
@@ -92,4 +98,7 @@ module.exports = {
   FILENAME,
   HttpCode,
   ROOT_PAGE_PATH,
+  MAX_ID_LENGTH,
+  FILE_COMMENTS_PATH,
+  MAX_COMMENTS,
 };

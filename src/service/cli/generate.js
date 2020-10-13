@@ -1,6 +1,7 @@
 'use strict';
 
 const chalk = require(`chalk`);
+const {nanoid} = require(`nanoid`);
 const fs = require(`fs`).promises;
 const {
   getRandomInt,
@@ -19,12 +20,15 @@ const {
   FILE_SENTENCES_PATH,
   FILE_TITLES_PATH,
   FILE_CATEGORIES_PATH,
+  MAX_ID_LENGTH,
+  FILE_COMMENTS_PATH,
+  MAX_COMMENTS,
 } = require(`./constants`);
 
 
 const getPictureFileName = (number)=>`item${(`0` + number).slice(-2)}.jpg`;
 
-const generateOffers = (count, titles, categories, sentences) => (
+const generateOffers = (count, titles, categories, sentences, comments) => (
   Array(count).fill({}).map(() => ({
     category: shuffle(categories).slice(0, getRandomInt(CategoriesRestrict.MIN, CategoriesRestrict.MAX)),
     description: shuffle(sentences).slice(1, 5).join(` `),
@@ -32,6 +36,17 @@ const generateOffers = (count, titles, categories, sentences) => (
     title: titles[getRandomInt(0, titles.length - 1)],
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
+    id: nanoid(MAX_ID_LENGTH),
+    comments: generateComments(getRandomInt(1, MAX_COMMENTS), comments),
+  }))
+);
+
+const generateComments = (count, comments) => (
+  Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
+    text: shuffle(comments)
+    .slice(0, getRandomInt(1, 3))
+    .join(` `),
   }))
 );
 
@@ -52,6 +67,7 @@ module.exports = {
     const sentences = await readContent(FILE_SENTENCES_PATH);
     const titles = await readContent(FILE_TITLES_PATH);
     const categories = await readContent(FILE_CATEGORIES_PATH);
+    const comments = await readContent(FILE_COMMENTS_PATH);
 
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
@@ -59,7 +75,7 @@ module.exports = {
       console.info(chalk.red(Messages.OVERMUCH));
       process.exit(EXIT_CODE_FAILURE);
     }
-    const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
+    const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences, comments));
     try {
       await fs.writeFile(FILE_NAME, content);
       console.info(chalk.green(Messages.SUCCESS));
