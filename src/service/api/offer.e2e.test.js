@@ -9,7 +9,7 @@ const DataService = require(`../data-service/offer`);
 const CommentService = require(`../data-service/comment`);
 const {HttpCode} = require(`../cli/constants`);
 
-const mockData = require(`./mocks/mockDataForOffer`);
+const mockData = require(`./mocks/mock-data-for-offer`);
 
 
 const createAPI = () => {

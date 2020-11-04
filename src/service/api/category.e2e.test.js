@@ -8,7 +8,7 @@ const category = require(`./category`);
 const DataService = require(`../data-service/category`);
 const {HttpCode} = require(`../cli/constants`);
 
-const mockData = require(`./mocks/mockDataForCategory`);
+const mockData = require(`./mocks/mock-data-for-category`);
 
 const app = express();
 app.use(express.json());

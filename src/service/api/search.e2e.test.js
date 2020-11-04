@@ -8,7 +8,7 @@ const search = require(`./search`);
 const DataService = require(`../data-service/search`);
 const {HttpCode} = require(`../cli/constants`);
 
-const mockData = require(`./mocks/mockDataForSearch`);
+const mockData = require(`./mocks/mock-data-for-search`);
 
 const app = express();
 app.use(express.json());
