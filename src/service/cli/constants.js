@@ -75,6 +75,11 @@ const HttpCode = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
+const Env = {
+  DEVELOPMENT: `development`,
+  PRODUCTION: `production`
+};
+
 const MAX_ID_LENGTH = 6;
 
 const MAX_COMMENTS = 4;
@@ -112,4 +117,5 @@ module.exports = {
   API_PREFIX,
   offerKeys,
   commentKeys,
+  Env,
 };
