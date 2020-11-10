@@ -4,6 +4,8 @@ const {Router} = require(`express`);
 const multer = require(`multer`);
 const path = require(`path`);
 const {nanoid} = require(`nanoid`);
+const {HttpCode} = require(`./../../service/cli/constants`);
+
 
 const UPLOAD_DIR = `../upload/img/`;
 
@@ -50,11 +52,15 @@ offersRouter.post(`/add`, upload.single(`avatar`), async (req, res) => {
 
 offersRouter.get(`/edit/:id`, async (req, res) => {
   const {id} = req.params;
-  const [offer, categories] = await Promise.all([
-    api.getOffer(id),
-    api.getCategories()
-  ]);
-  res.render(`offers/ticket-edit`, {offer, categories});
+  try {
+    const [offer, categories] = await Promise.all([
+      api.getOffer(id),
+      api.getCategories()
+    ]);
+    res.render(`offers/ticket-edit`, {offer, categories});
+  } catch (error) {
+    res.redirect(`back`);
+  }
 });
 
 offersRouter.get(`/:id`, (req, res) => res.render(`offers/ticket`));
