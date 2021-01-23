@@ -1,13 +1,13 @@
 -- Получить список всех категорий (идентификатор, наименование категории)
 SELECT
-  id AS "идентификатор",
-  title AS "наименование категории"
+  id ,
+  title
 FROM categories;
 
 -- Получить список категорий для которых создано минимум одно объявление (идентификатор, наименование категории);
 SELECT
-  offers_categories.category_id AS "идентификатор",
-  categories.title  AS "наименование категории"
+  offers_categories.category_id,
+  categories.title
 FROM offers_categories
 INNER JOIN categories
 	ON categories.id = offers_categories.category_id
@@ -15,9 +15,9 @@ GROUP BY offers_categories.category_id, categories.title;
 
 -- Получить список категорий с количеством объявлений (идентификатор, наименование категории, количество объявлений в категории);
 SELECT
-  offers_categories.category_id AS "идентификатор",
-  categories.title AS "наименование категории",
-  count(offers_categories.category_id) AS "количество объявлений в категории"
+  offers_categories.category_id,
+  categories.title,
+  count(offers_categories.category_id) AS "count of offers in category"
 FROM offers_categories
 INNER JOIN categories
 	ON categories.id = offers_categories.category_id
@@ -27,80 +27,54 @@ GROUP BY offers_categories.category_id, categories.title;
 -- текст объявления, дата публикации, имя и фамилия автора, контактный email, количество комментариев, наименование категорий).
 -- Сначала свежие объявления;
 SELECT
-  offers.id AS "идентификатор объявления",
-  offers.title AS "заголовок объявления",
-  offers.sum AS "стоимость",
-  types.title AS "тип объявления",
-  offers.description AS "текст объявления",
-  offers.created_date AS "дата публикации",
-  concat(users.first_name, ' ', users.last_name) AS "имя и фамилия автора",
-  users.email AS "контактный email",
-  (SELECT COUNT(*) FROM comments WHERE offers.id = comments.offer_id) AS "количество комментариев",
-  STRING_AGG(categories.title, ', ') AS "наименование категорий"
-FROM offers_categories
-INNER JOIN offers
-	ON offers.id = offers_categories.offer_id
-INNER JOIN categories
-	ON categories.id = offers_categories.category_id
-INNER JOIN types
-	ON offers.type_id = types.id
-INNER JOIN users
-	ON offers.user_id = users.id
-GROUP BY
   offers.id,
   offers.title,
   offers.sum,
-  types.title,
+  offers.type,
   offers.description,
   offers.created_date,
-  users.first_name,
-  users.last_name,
-  users.email
-ORDER BY
-  offers.created_date DESC;
+  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  users.email,
+  COUNT(comments.id) AS comments_count,
+  STRING_AGG(DISTINCT categories.title, ', ') AS "categories list"
+FROM offers
+JOIN offers_categories ON offers.id = offers_categories.offer_id
+JOIN categories ON offers_categories.category_id = categories.id
+LEFT JOIN comments ON comments.offer_id = offers.id
+JOIN users ON users.id = offers.user_id
+GROUP BY offers.id, users.id
+ORDER BY offers.created_date DESC
+
 
 -- Получить полную информацию определённого объявления
 -- (идентификатор объявления, заголовок объявления, стоимость, тип объявления, текст объявления, дата публикации, имя и фамилия автора,
 -- контактный email, количество комментариев, наименование категорий);
 SELECT
-  offers.id AS "идентификатор объявления",
-  offers.title AS "заголовок объявления",
-  offers.sum AS "стоимость",
-  types.title AS "тип объявления",
-  offers.description AS "текст объявления",
-  offers.created_date AS "дата публикации",
-  concat(users.first_name, ' ', users.last_name) AS "имя и фамилия автора",
-  users.email AS "контактный email",
-  (SELECT COUNT(*) FROM comments WHERE offers.id = comments.offer_id) AS "количество комментариев",
-  STRING_AGG(categories.title, ', ') AS "наименование категорий"
-FROM offers_categories
-INNER JOIN offers
-	ON offers.id = offers_categories.offer_id
-INNER JOIN categories
-	ON categories.id = offers_categories.category_id
-INNER JOIN types
-	ON offers.type_id = types.id
-INNER JOIN users
-	ON offers.user_id = users.id
-WHERE
-  offers.id = 1
-GROUP BY
   offers.id,
   offers.title,
   offers.sum,
-  types.title,
+  offers.type,
   offers.description,
   offers.created_date,
-  users.first_name,
-  users.last_name,
-  users.email;
+  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  users.email,
+  COUNT(comments.id) AS comments_count,
+  STRING_AGG(DISTINCT categories.title, ', ') AS "categories list"
+FROM offers
+JOIN offers_categories ON offers.id = offers_categories.offer_id
+JOIN categories ON offers_categories.category_id = categories.id
+LEFT JOIN comments ON comments.offer_id = offers.id
+JOIN users ON users.id = offers.user_id
+WHERE
+  offers.id = 1
+GROUP BY offers.id, users.id
 
 -- Получить список из 5 свежих комментариев (идентификатор комментария, идентификатор объявления, имя и фамилия автора, текст комментария);
 SELECT
-  comments.id AS "идентификатор комментария",
-  comments.offer_id AS "идентификатор объявления",
-  concat(users.first_name, ' ', users.last_name) AS "имя и фамилия автора",
-  comments.text AS "текст комментария"
+  comments.id,
+  comments.offer_id,
+  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  comments.text
 FROM comments
 INNER JOIN users
 	ON comments.user_id = users.id
@@ -109,10 +83,10 @@ LIMIT 5;
 
 -- Получить список комментариев для определённого объявления (идентификатор комментария, идентификатор объявления, имя и фамилия автора, текст комментария). Сначала новые комментарии;
 SELECT
-  comments.id AS "идентификатор комментария",
-  comments.offer_id AS "идентификатор объявления",
-  concat(users.first_name, ' ', users.last_name) AS "имя и фамилия автора",
-  comments.text AS "текст комментария"
+  comments.id,
+  comments.offer_id,
+  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  comments.text
 FROM comments
 INNER JOIN users
 	ON comments.user_id = users.id
@@ -121,14 +95,8 @@ WHERE
 ORDER BY comments.created_date DESC;
 
 -- Выбрать 2 объявления, соответствующих типу «куплю»;
-SELECT *
-FROM offers
-WHERE offers.type_id = (
-  SELECT
-    types.id
-  FROM types
-  WHERE types.title = 'offer'
-)
+SELECT * FROM offers
+WHERE type = 'OFFER'
 LIMIT 2;
 
 -- Обновить заголовок определённого объявления на «Уникальное предложение!»;

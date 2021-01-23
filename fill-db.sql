@@ -4,14 +4,8 @@ VALUES
 ('Ivan', 'Ivanov', 'ivan@fmail.com', 'qwerty', 'avatar'),
 ('Maria', 'Ivanova', 'maria@fmail.com', 'ytrewq', 'foto');
 
--- добавление типов объявлений
-INSERT INTO types (title)
-VALUES
-('offer'),
-('sale');
-
 -- добавление объявлений
-INSERT INTO offers (title, description, sum, created_date, picture, user_id, type_id)
+INSERT INTO offers (title, description, sum, created_date, picture, user_id, type)
 VALUES
 (
  'Продам книги Стивена Кинга',
@@ -20,7 +14,7 @@ VALUES
   '2020-12-03',
   'picture',
   2,
-  1
+  'OFFER'
 ),
 (
  'Продам новую приставку Sony Playstation 5',
@@ -29,7 +23,7 @@ VALUES
   '2019-12-03',
   'foto',
   1,
-  2
+  'OFFER'
 ),
 (
  'Продам куртку Адидас',
@@ -38,7 +32,7 @@ VALUES
   '2020-12-07',
   'picture',
   1,
-  1
+  'SALE'
 ),
 (
  'Куплю детские санки',
@@ -47,7 +41,7 @@ VALUES
   '2020-12-08',
   'foto',
   1,
-  1
+  'SALE'
 ),
 (
  'Куплю породистого кота',
@@ -56,7 +50,7 @@ VALUES
   '2020-12-02',
   'portrait',
   2,
-  1
+  'SALE'
 );
 
 -- добавление комментариев

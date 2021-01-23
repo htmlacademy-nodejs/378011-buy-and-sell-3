@@ -23,7 +23,6 @@ CREATE DATABASE academy_buy_and_sell
     CONNECTION LIMIT = -1;
 
 DROP TABLE IF EXISTS offers_categories;
-DROP TABLE IF EXISTS types;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS offers;
@@ -34,15 +33,9 @@ CREATE TABLE users
   id BIGSERIAL PRIMARY KEY,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) UNIQUE NOT NULL,
-  password VARCHAR(100) NOT NULL,
-  avatar TEXT
-);
-
-CREATE TABLE types
-(
-	id BIGSERIAL PRIMARY KEY,
-	title VARCHAR(50) NOT NULL
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  avatar VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE offers
@@ -54,11 +47,8 @@ CREATE TABLE offers
     created_date DATE NOT NULL,
     picture TEXT,
     user_id BIGINT NOT NULL,
-    type_id BIGINT NOT NULL,
+    type varchar(5) NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users
-    ON UPDATE CASCADE
-    ON DELETE CASCADE,
-  FOREIGN KEY(type_id) REFERENCES types
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
@@ -83,7 +73,7 @@ CREATE TABLE comments
 CREATE TABLE categories
 (
 	id BIGSERIAL PRIMARY KEY,
-	title VARCHAR(50) NOT NULL
+	title VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE offers_categories
