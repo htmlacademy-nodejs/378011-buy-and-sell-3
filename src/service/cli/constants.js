@@ -86,7 +86,7 @@ const MAX_COMMENTS = 4;
 
 const FILE_COMMENTS_PATH = `./data/comments.txt`;
 
-const offerKeys = [`category`, `description`, `picture`, `title`, `type`, `sum`];
+const offerKeys = [`categories`, `description`, `picture`, `title`, `type`, `sum`];
 
 const commentKeys = [`text`];
 

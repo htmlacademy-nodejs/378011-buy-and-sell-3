@@ -5,9 +5,17 @@ const mainRouter = new Router();
 const api = require(`./../api`).getAPI();
 
 mainRouter.get(`/`, async (req, res) => {
-  const offers = await api.getOffers();
-  res.render(`main/main`, {offers});
+  const [
+    offers,
+    categories
+  ] = await Promise.all([
+    api.getOffers({}),
+    api.getCategories(true)
+  ]);
+
+  res.render(`main`, {offers, categories});
 });
+
 mainRouter.get(`/register`, (req, res) => res.render(`main/sign-up`));
 mainRouter.get(`/login`, (req, res) => res.render(`main/login`));
 mainRouter.get(`/search`, async (req, res) => {
