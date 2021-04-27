@@ -2,6 +2,11 @@
 
 const axios = require(`axios`);
 
+const TIMEOUT = 1000;
+
+const port = process.env.API_PORT || 3000;
+const defaultUrl = `http://localhost:${port}/api/`;
+
 class API {
   constructor(baseURL, timeout) {
     this._http = axios.create({
@@ -15,8 +20,8 @@ class API {
     return response.data;
   }
 
-  getOffers({comments}) {
-    return this._load(`/offers`, {params: {comments}});
+  getOffers({offset, limit, comments}) {
+    return this._load(`/offers`, {params: {offset, limit, comments}});
   }
 
   getOffer(id, comments) {
@@ -39,10 +44,6 @@ class API {
   }
 }
 
-const TIMEOUT = 1000;
-
-const port = process.env.API_PORT || 3000;
-const defaultUrl = `http://localhost:${port}/api/`;
 
 const defaultAPI = new API(defaultUrl, TIMEOUT);
 

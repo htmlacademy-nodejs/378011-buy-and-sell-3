@@ -11,10 +11,14 @@ module.exports = (app, offerService, commentService) => {
   const route = new Router();
 
   app.use(`/offers`, route);
-
   route.get(`/`, async (req, res) => {
-    const {comments} = req.query;
-    const result = await offerService.findAll(comments);
+    const {offset, limit, comments} = req.query;
+    let result;
+    if (limit || offset) {
+      result = await offerService.findPage({limit, offset});
+    } else {
+      result = await offerService.findAll(comments);
+    }
     res.status(HttpCode.OK).json(result);
   });
 
