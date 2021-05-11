@@ -9,21 +9,21 @@ block content
           | Найдено
           span.js-results #{results.length} публикаций
         ul.search-results__list
-          each result in results
+          each offer in results
             li.search-results__item
               .ticket-card.ticket-card--color05
                 .ticket-card__img
-                  img(src=`/img/${result.picture}` alt="Изображение товара")
+                  img(src=`/img/${offer.picture}` alt="Изображение товара")
                 .ticket-card__info
-                  +ticketLabel(result.type)
+                  +ticketLabel(offer.type)
                   .ticket-card__categories
-                    each category in result.category
-                      a(href="#") #{category}
+                    each category in offer.categories
+                      a(href="#") #{category.name}
                   .ticket-card__header
                     h3.ticket-card__title
-                      a(href="#") #{result.title}
+                      a(href="#") #{offer.title}
                     p.ticket-card__price
-                      span.js-sum #{result.sum}
+                      span.js-sum #{offer.sum}
                       |  ₽
                   .ticket-card__desc
-                    p #{result.description}
+                    p #{offer.description}
