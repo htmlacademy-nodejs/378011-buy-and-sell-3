@@ -26,7 +26,7 @@ block content
                   label(for='comment-field') Описание
                   span Обязательное поле
               .ticket-form__row
-                select#category-field.form__select.js-multiple-select(name='category', data-label='Выбрать категорию публикации')
+                select#category-field.form__select.js-multiple-select(name='categories', data-label='Выбрать категорию публикации')
                   each category in categories
                     option(value=category.id) #{category.name}
               .ticket-form__row
@@ -41,4 +41,5 @@ block content
                   .switch__item
                     input#sell-field.visually-hidden(type='radio', name='action', value="SALE")
                     label.switch__button(for='sell-field') Продам
+            +errorMessage(error)
             button.form__button.btn.btn--medium.js-button(type='submit', disabled='') Опубликовать

@@ -21,8 +21,8 @@ const DEFAULT_COMMAND = `--help`;
 const MAX_OFFERS_NUMBER = 1000;
 
 const OfferType = {
-  OFFER: `offer`,
-  SALE: `sale`,
+  OFFER: `OFFER`,
+  SALE: `SALE`,
 };
 
 const SumRestrict = {
@@ -84,11 +84,18 @@ const MAX_ID_LENGTH = 6;
 
 const MAX_COMMENTS = 4;
 
+const MIN_COMMENTS_LENGTH = 20;
+
 const FILE_COMMENTS_PATH = `./data/comments.txt`;
 
 const offerKeys = [`categories`, `description`, `picture`, `title`, `type`, `sum`];
 
-const commentKeys = [`text`];
+const HttpMethod = {
+  GET: `GET`,
+  POST: `POST`,
+  PUT: `PUT`,
+  DELETE: `DELETE`
+};
 
 module.exports = {
   DEFAULT_COUNT,
@@ -116,6 +123,7 @@ module.exports = {
   MAX_COMMENTS,
   API_PREFIX,
   offerKeys,
-  commentKeys,
   Env,
+  MIN_COMMENTS_LENGTH,
+  HttpMethod,
 };
