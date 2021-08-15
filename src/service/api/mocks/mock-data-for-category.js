@@ -9,6 +9,7 @@ const mockCategories = [
 
 const mockOffers = [
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Животные`,
       `Журналы`
@@ -20,14 +21,17 @@ const mockOffers = [
     "sum": 97892,
     "comments": [
       {
+        "user": `petrov@example.com`,
         "text": `Оплата наличными или перевод на карту?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `Почему в таком ужасном состоянии?`
       }
     ]
   },
   {
+    "user": `petrov@example.com`,
     "categories": [
       `Игры`
     ],
@@ -38,11 +42,13 @@ const mockOffers = [
     "sum": 84843,
     "comments": [
       {
+        "user": `ivanov@example.com`,
         "text": `А сколько игр в комплекте? С чем связана продажа? Почему так дешёво? А где блок питания?`
       }
     ]
   },
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Животные`
     ],
@@ -53,15 +59,19 @@ const mockOffers = [
     "sum": 47160,
     "comments": [
       {
+        "user": `petrov@example.com`,
         "text": `Совсем немного... Продаю в связи с переездом. Отрываю от сердца.`
       },
       {
+        "user": `petrov@example.com`,
         "text": `А где блок питания? Почему в таком ужасном состоянии?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `А сколько игр в комплекте?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `С чем связана продажа? Почему так дешёво? Продаю в связи с переездом. Отрываю от сердца.`
       }
     ]

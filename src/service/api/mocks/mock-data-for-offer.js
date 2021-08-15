@@ -14,6 +14,7 @@ const mockCategories = [
 
 const mockOffers = [
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Авто`
     ],
@@ -24,20 +25,25 @@ const mockOffers = [
     "sum": 63192,
     "comments": [
       {
+        "user": `petrov@example.com`,
         "text": `Продаю в связи с переездом. Отрываю от сердца.`
       },
       {
+        "user": `sidorov@example.com`,
         "text": `Вы что?! В магазине дешевле. Оплата наличными или перевод на карту? Продаю в связи с переездом. Отрываю от сердца.`
       },
       {
+        "user": `petrov@example.com`,
         "text": `Почему в таком ужасном состоянии?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `А где блок питания? С чем связана продажа? Почему так дешёво? Вы что?! В магазине дешевле.`
       }
     ]
   },
   {
+    "user": `petrov@example.com`,
     "categories": [
       `Косметика и парфюмерия`,
       `Книги`,
@@ -50,14 +56,17 @@ const mockOffers = [
     "sum": 15782,
     "comments": [
       {
+        "user": `ivanov@example.com`,
         "text": `С чем связана продажа? Почему так дешёво? Совсем немного... А сколько игр в комплекте?`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `Продаю в связи с переездом. Отрываю от сердца. С чем связана продажа? Почему так дешёво?`
       }
     ]
   },
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Бытовая техника`,
       `Косметика и парфюмерия`,
@@ -70,14 +79,17 @@ const mockOffers = [
     "sum": 41869,
     "comments": [
       {
+        "user": `petrov@example.com`,
         "text": `А сколько игр в комплекте? Вы что?! В магазине дешевле. Оплата наличными или перевод на карту?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `Совсем немного...`
       }
     ]
   },
   {
+    "user": `petrov@example.com`,
     "categories": [
       `Животные`,
       `Разное`,
@@ -90,6 +102,7 @@ const mockOffers = [
     "sum": 30388,
     "comments": [
       {
+        "user": `ivanov@example.com`,
         "text": `Продаю в связи с переездом. Отрываю от сердца. Почему в таком ужасном состоянии? Вы что?! В магазине дешевле.`
       }
     ]

@@ -97,6 +97,8 @@ const HttpMethod = {
   DELETE: `DELETE`
 };
 
+const SALT_ROUNDS = 10;
+
 module.exports = {
   DEFAULT_COUNT,
   FILE_NAME,
@@ -126,4 +128,5 @@ module.exports = {
   Env,
   MIN_COMMENTS_LENGTH,
   HttpMethod,
+  SALT_ROUNDS,
 };

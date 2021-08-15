@@ -29,4 +29,7 @@ module.exports = Joi.object({
   .required(),
 
   picture: Joi.string(),
+
+  userId: Joi.number().integer().positive().required()
+
 });
