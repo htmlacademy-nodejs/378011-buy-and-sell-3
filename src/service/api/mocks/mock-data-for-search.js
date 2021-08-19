@@ -13,6 +13,7 @@ const mockCategories = [
 
 const mockOffers = [
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Разное`,
       `Одежда`
@@ -24,17 +25,21 @@ const mockOffers = [
     "sum": 74905,
     "comments": [
       {
+        "user": `ivanov@example.com`,
         "text": `Продаю в связи с переездом. Отрываю от сердца. С чем связана продажа? Почему так дешёво?`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `А сколько игр в комплекте? Оплата наличными или перевод на карту?`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `А где блок питания? Вы что?! В магазине дешевле.`
       }
     ]
   },
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Игрушки для взрослых`
     ],
@@ -45,14 +50,17 @@ const mockOffers = [
     "sum": 12141,
     "comments": [
       {
+        "user": `petrov@example.com`,
         "text": `Продаю в связи с переездом. Отрываю от сердца. Оплата наличными или перевод на карту?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `С чем связана продажа? Почему так дешёво?`
       }
     ]
   },
   {
+    "user": `petrov@example.com`,
     "categories": [
       `Косметика и парфюмерия`,
       `Стойматериалы`
@@ -64,20 +72,25 @@ const mockOffers = [
     "sum": 41493,
     "comments": [
       {
+        "user": `ivanov@example.com`,
         "text": `А где блок питания? Продаю в связи с переездом. Отрываю от сердца.`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `Совсем немного...`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `Оплата наличными или перевод на карту? А сколько игр в комплекте? А где блок питания?`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `Почему в таком ужасном состоянии? Совсем немного...`
       }
     ]
   },
   {
+    "user": `ivanov@example.com`,
     "categories": [
       `Одежда`
     ],
@@ -88,14 +101,17 @@ const mockOffers = [
     "sum": 57990,
     "comments": [
       {
+        "user": `petrov@example.com`,
         "text": `А где блок питания?`
       },
       {
+        "user": `petrov@example.com`,
         "text": `Неплохо, но дорого.`
       }
     ]
   },
   {
+    "user": `petrov@example.com`,
     "categories": [
       `Посуда`,
       `Еда`
@@ -107,9 +123,11 @@ const mockOffers = [
     "sum": 46812,
     "comments": [
       {
+        "user": `ivanov@example.com`,
         "text": `Оплата наличными или перевод на карту? А где блок питания?`
       },
       {
+        "user": `ivanov@example.com`,
         "text": `С чем связана продажа? Почему так дешёво? Совсем немного...`
       }
     ]

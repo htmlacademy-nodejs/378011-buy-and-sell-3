@@ -4,6 +4,12 @@ SELECT
   title
 FROM categories;
 
+-- Получить спискок юзеров (имя, емейл)
+SELECT
+  name,
+  email
+FROM users;
+
 -- Получить список категорий для которых создано минимум одно объявление (идентификатор, наименование категории);
 SELECT
   offers_categories.category_id,
