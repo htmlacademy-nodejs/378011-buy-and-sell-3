@@ -1,4 +1,4 @@
-extends ../layout-logged
+extends ../layout
 
 block content
   -
@@ -44,6 +44,7 @@ block content
           .ticket__comment-form
             form.form.comment-form(action=`/offers/${offer.id}/comments` method="post" enctype="application/x-www-form-urlencoded"
               autocomplete="off")
+              input(type="hidden" name="_csrf" value=csrfToken)
               .comment-form__header
                 a.comment-form__avatar.avatar(href='#')
                   img(src='/img/avatar.jpg', srcset='/img/avatar@2x.jpg 2x', alt='Аватар пользователя')

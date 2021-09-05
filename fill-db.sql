@@ -1,8 +1,8 @@
 -- добавление пользователей
-INSERT INTO users (first_name, last_name, email, password, avatar)
+INSERT INTO users (name, email, password, avatar)
 VALUES
-('Ivan', 'Ivanov', 'ivan@fmail.com', 'qwerty', 'avatar'),
-('Maria', 'Ivanova', 'maria@fmail.com', 'ytrewq', 'foto');
+('Ivan Ivanov', 'ivan@fmail.com', 'qwerty', 'avatar'),
+('Maria Ivanova', 'maria@fmail.com', 'ytrewq', 'foto');
 
 -- добавление объявлений
 INSERT INTO offers (title, description, sum, created_date, picture, user_id, type)

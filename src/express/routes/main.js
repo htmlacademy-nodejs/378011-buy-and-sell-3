@@ -9,6 +9,7 @@ const upload = require(`./../../service/middlewares/upload`);
 const OFFERS_PER_PAGE = 8;
 
 mainRouter.get(`/`, async (req, res) => {
+  const {user} = req.session;
   let {page = 1} = req.query;
   page = +page;
 
@@ -25,7 +26,7 @@ mainRouter.get(`/`, async (req, res) => {
 
   const totalPages = Math.ceil(count / OFFERS_PER_PAGE);
 
-  res.render(`main/main`, {offers, page, totalPages, categories});
+  res.render(`main/main`, {offers, page, user, totalPages, categories});
 });
 
 mainRouter.get(`/register`, (req, res) => {
@@ -36,7 +37,7 @@ mainRouter.get(`/register`, (req, res) => {
 mainRouter.post(`/register`, upload.single(`avatar`), async (req, res) => {
   const {body, file} = req;
   const userData = {
-    name: body[`user-name`],
+    name: `${body[`user-name`]}`,
     email: body[`user-email`],
     avatar: ``,
     password: body[`user-password`],
@@ -53,7 +54,22 @@ mainRouter.post(`/register`, upload.single(`avatar`), async (req, res) => {
   }
 });
 
-mainRouter.get(`/login`, (req, res) => res.render(`main/login`));
+mainRouter.get(`/login`, (req, res) => {
+  const {error} = req.query;
+  res.render(`main/login`, {error});
+});
+
+
+mainRouter.post(`/login`, async (req, res) => {
+  try {
+    const user = await api.auth(req.body[`user-email`], req.body[`user-password`]);
+    req.session.user = user;
+    res.redirect(`/`);
+  } catch (error) {
+    res.redirect(`/login?error=${encodeURIComponent(error.response.data)}`);
+  }
+});
+
 mainRouter.get(`/search`, async (req, res) => {
   try {
     const {search} = req.query;
@@ -67,6 +83,11 @@ mainRouter.get(`/search`, async (req, res) => {
       results: []
     });
   }
+});
+
+mainRouter.get(`/logout`, (req, res) => {
+  delete req.session.user;
+  res.redirect(`/`);
 });
 
 module.exports = mainRouter;

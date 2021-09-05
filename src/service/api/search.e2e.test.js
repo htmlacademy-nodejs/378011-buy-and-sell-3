@@ -16,6 +16,10 @@ const {
   mockOffers
 } = require(`./mocks/mock-data-for-search`);
 
+const {
+  mockUsers
+} = require(`./mocks/mock-users`);
+
 const mockDB = new Sequelize(`sqlite::memory:`, {logging: false});
 
 const app = express();
@@ -23,7 +27,7 @@ app.use(express.json());
 
 
 beforeAll(async () => {
-  await initDB(mockDB, {categories: mockCategories, offers: mockOffers});
+  await initDB(mockDB, {categories: mockCategories, offers: mockOffers, users: mockUsers});
   search(app, new DataService(mockDB));
 });
 

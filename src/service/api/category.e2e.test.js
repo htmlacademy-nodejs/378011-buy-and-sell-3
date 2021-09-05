@@ -12,9 +12,12 @@ const {HttpCode} = require(`../cli/constants`);
 
 const {
   mockCategories,
-  mockOffers,
-  mockUsers
+  mockOffers
 } = require(`./mocks/mock-data-for-category`);
+
+const {
+  mockUsers
+} = require(`./mocks/mock-users`);
 
 const mockDB = new Sequelize(`sqlite::memory:`, {logging: false});
 

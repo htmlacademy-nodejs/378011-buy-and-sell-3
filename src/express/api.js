@@ -64,6 +64,13 @@ class API {
     });
   }
 
+  auth(email, password) {
+    return this._load(`/user/auth`, {
+      method: HttpMethod.POST,
+      data: {email, password}
+    });
+  }
+
 }
 
 

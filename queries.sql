@@ -39,7 +39,7 @@ SELECT
   offers.type,
   offers.description,
   offers.created_date,
-  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  users.name AS "first and last name",
   users.email,
   COUNT(comments.id) AS comments_count,
   STRING_AGG(DISTINCT categories.title, ', ') AS "categories list"
@@ -62,7 +62,7 @@ SELECT
   offers.type,
   offers.description,
   offers.created_date,
-  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  users.name AS "first and last name",
   users.email,
   COUNT(comments.id) AS comments_count,
   STRING_AGG(DISTINCT categories.title, ', ') AS "categories list"
@@ -79,7 +79,7 @@ GROUP BY offers.id, users.id
 SELECT
   comments.id,
   comments.offer_id,
-  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  users.name AS "first and last name",
   comments.text
 FROM comments
 INNER JOIN users
@@ -91,7 +91,7 @@ LIMIT 5;
 SELECT
   comments.id,
   comments.offer_id,
-  concat(users.first_name, ' ', users.last_name) AS "first and last name",
+  users.name AS "first and last name",
   comments.text
 FROM comments
 INNER JOIN users
