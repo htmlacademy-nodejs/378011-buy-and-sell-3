@@ -16,9 +16,13 @@ const {
   mockOffers
 } = require(`./mocks/mock-data-for-offer`);
 
+const {
+  mockUsers
+} = require(`./mocks/mock-users`);
+
 const createAPI = async () => {
   const mockDB = new Sequelize(`sqlite::memory:`, {logging: false});
-  await initDB(mockDB, {categories: mockCategories, offers: mockOffers});
+  await initDB(mockDB, {categories: mockCategories, offers: mockOffers, users: mockUsers});
   const app = express();
   app.use(express.json());
   offer(app, new DataService(mockDB), new CommentService(mockDB));
@@ -68,7 +72,8 @@ describe(`API creates an offer if data is valid`, () => {
     description: `Дам погладить котика. Дорого. Не гербалайф. Дам погладить котика. Дорого. Не гербалайф`,
     picture: `cat.jpg`,
     type: `OFFER`,
-    sum: 100500
+    sum: 100500,
+    userId: 1
   };
   let app; let response;
 
@@ -100,6 +105,7 @@ describe(`API refuses to create an offer if data is invalid`, () => {
     type: `OFFER`,
     picture: `cat.jpg`,
     description: `Дам погладить котика. Дорого. Не гербалайф`,
+    userId: 1
   };
 
   let app;
@@ -160,7 +166,8 @@ describe(`API changes existent offer`, () => {
     description: `Дам погладить котика. Дорого. Не гербалайф. Дам погладить котика. Дорого. Не гербалайф`,
     picture: `cat.jpg`,
     type: `OFFER`,
-    sum: 100500
+    sum: 100500,
+    userId: 1
   };
   let app; let response;
 
@@ -189,7 +196,8 @@ describe(`API changes non-existent offer`, () => {
     description: `Дам погладить котика. Дорого. Не гербалайф. Дам погладить котика. Дорого. Не гербалайф`,
     picture: `cat.jpg`,
     type: `OFFER`,
-    sum: 100500
+    sum: 100500,
+    userId: 1
   };
   let app; let response;
 
@@ -278,7 +286,8 @@ describe(`API returns comments for given offer`, () => {
 describe(`API creates a comment if data is valid`, () => {
 
   const newComment = {
-    text: `Валидному комментарию достаточно этого поля`
+    text: `Валидному комментарию достаточно этого поля`,
+    userId: 1
   };
 
   let app; let response;
@@ -307,7 +316,8 @@ test(`API refuses to create a comment to non-existent offer and returns status c
   return request(app)
   .post(`/offers/20/comments`)
   .send({
-    text: `Неважно`
+    text: `Неважно`,
+    userId: 1
   })
   .expect(HttpCode.NOT_FOUND);
 
